@@ -1,20 +1,36 @@
 "use client";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { FormEvent, useState } from "react";
 
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
-  const loginHandler = (e: FormEvent<HTMLFormElement>): void => {
+  const router = useRouter();
+
+  const loginHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
 
-    if (email === "" || password === "") {
-      setError(true);
-    } else {
-      console.log("connect to MongoDB");
-      setError(false)
+    try {
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+
+      if (res?.error) {
+        setError("Invalid Credentials");
+        return;
+      } else if (res?.ok) {
+        console.log("its login")
+        router.replace("/dashboard");
+      }
+    } catch (error) {
+      console.log(error);
+      setError("An unexpected error occured");
     }
   };
 
@@ -37,16 +53,17 @@ export const LoginForm: React.FC = () => {
             placeholder="Password"
             className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
-          <button className=" bg-green-400 px-6 py-2 text-white font-bold hover:bg-green-500 rounded-lg transition-all">
+          <button className=" bg-green-400 px-6 py-2 text-white font-bold hover:bg-green-500 active:scale-95 rounded-lg transition-all">
             Login
           </button>
-          {error ? (
+          {error && (
             <div className="px-3 py-1 w-fit text-white text-sm bg-red-500 rounded-md">
-              Email & Password cannot be empty
+              {error}
             </div>
-          ) : null}
+          )}
           <Link href={"/register"} className="text-sm text-right">
-            {`Don't have an account?`} <span className="underline"> Register</span>
+            {`Don't have an account?`}{" "}
+            <span className="underline"> Register</span>
           </Link>
         </form>
       </div>
