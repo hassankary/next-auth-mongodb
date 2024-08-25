@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { FormEvent, useRef, useState } from "react";
 
 export const RegisterForm: React.FC = () => {
-  const [fullName, setFullName] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
@@ -15,7 +15,7 @@ export const RegisterForm: React.FC = () => {
   ): Promise<void> => {
     e.preventDefault();
 
-    if (!fullName || !email || !password) {
+    if (!name || !email || !password) {
       setError(true);
       return;
     }
@@ -27,7 +27,7 @@ export const RegisterForm: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          fullName,
+          name,
           email,
           password,
         }),
@@ -36,7 +36,7 @@ export const RegisterForm: React.FC = () => {
       if (res.ok) {
         if (formRef.current) {
           formRef.current.reset();
-          setFullName("");
+          setName("");
           setEmail("");
           setPassword("");
         }
@@ -59,8 +59,8 @@ export const RegisterForm: React.FC = () => {
           className="flex flex-col gap-3"
         >
           <input
-            onChange={(e) => setFullName(e.target.value)}
-            value={fullName}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             type="text"
             placeholder="Full Name"
             className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
