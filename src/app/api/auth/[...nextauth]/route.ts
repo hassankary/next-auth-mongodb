@@ -24,20 +24,20 @@ export const authOptions: NextAuthOptions = {
           const user = await User.findOne({ email });
 
           if (!user) {
-            return null;
+            throw new Error("Account has not been registered")
           }
 
           const passwordMatch = await bcrypt.compare(password, user.password);
 
           if (!passwordMatch) {
-            return null;
+            throw new Error("Invalid password")
           }
 
           // Return user object with correct type
           return user as NextAuthUser;
         } catch (error) {
           console.error("Error during authorization:", error);
-          return null;
+          throw new Error(error.message);
         }
       },
     }),

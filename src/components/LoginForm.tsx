@@ -21,11 +21,21 @@ export const LoginForm: React.FC = () => {
         redirect: false,
       });
 
+      if (!email && !password) {
+        setError("Form cannot be empty");
+        return
+      } else if (!email) {
+        setError("Email cannot be empty");
+        return
+      } else if (!password) {
+        setError("Password cannot be empty");
+        return
+      }
+
       if (res?.error) {
-        setError("Invalid Credentials");
+        setError(res.error);
         return;
       } else if (res?.ok) {
-        console.log("its login")
         router.replace("/dashboard");
       }
     } catch (error) {
