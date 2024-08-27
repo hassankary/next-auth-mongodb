@@ -6,17 +6,27 @@ export const RegisterForm: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const formRef = useRef<HTMLFormElement>(null);
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
 
   const registerHandler = async (
     e: FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
-      setError(true);
+    if (!name.trim() || !email.trim() || !password.trim()) {
+      setError("Form cannot be empty");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("Email invalid");
       return;
     }
 
@@ -40,9 +50,11 @@ export const RegisterForm: React.FC = () => {
           setEmail("");
           setPassword("");
         }
-        setError(false);
+        setError("");
       } else {
-        console.log("User registration failed.");
+        const data = await res.json();
+        console.log("User registration failed.", data.message);
+        setError(data.message);
       }
     } catch (error) {
       console.log("Error during registration:", error);
@@ -87,7 +99,7 @@ export const RegisterForm: React.FC = () => {
           </button>
           {error ? (
             <div className="px-3 py-1 w-fit text-white text-sm bg-red-500 rounded-md">
-              Form cannot be empty
+              {error}
             </div>
           ) : null}
           <Link href={"/"} className="text-sm text-right">
