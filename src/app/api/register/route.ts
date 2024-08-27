@@ -15,8 +15,16 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await connectMongoDB();
-    await User.create({ name, email, password: hashedPassword });
+    const ExistingUser = await User.findOne({ email });
 
+    if (ExistingUser) {
+      return NextResponse.json(
+        { message: "Email already in use." },
+        { status: 409 }
+      );
+    }
+    
+    await User.create({ name, email, password: hashedPassword });
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {
     if (error instanceof Error) {
