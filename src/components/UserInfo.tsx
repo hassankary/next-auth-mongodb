@@ -1,5 +1,6 @@
 "use client";
 import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
@@ -12,6 +13,8 @@ export const UserInfo: React.FC = () => {
     if (status === "unauthenticated") {
       router.push("/");
     }
+    // console.log("session =>", session);
+    // console.log("status =>", status);
   }, [status, session, router]);
 
   if (status === "loading") {
@@ -23,9 +26,20 @@ export const UserInfo: React.FC = () => {
   }
 
   return (
-    <div className="border-y-2 border-green-500 font-bold px-10 py-5 rounded-2xl shadow-xl space-y-5">
-      <h1 className="font-bold text-center">Data User</h1>
-      <div className="flex flex-col gap-1">
+    <div className="min-w-[300px] border-y-2 border-green-500 font-bold px-10 py-5 rounded-2xl shadow-xl space-y-5">
+      <h1 className="font-extrabold text-center">Account:</h1>
+      <div className="flex flex-col text-center gap-1">
+        <div className="flex justify-center">
+          <Image
+            src={session?.user?.image ? session.user.image : "dummy.jpg"}
+            alt="User Image"
+            width={60}
+            height={60}
+            className="rounded-full mb-1"
+            quality={100}
+            unoptimized
+          />
+        </div>
         <div>{session?.user?.name}</div>
         <div>{session?.user?.email}</div>
       </div>

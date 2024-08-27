@@ -85,7 +85,10 @@ export const LoginForm: React.FC = () => {
         </form>
         <div className="text-center font-bold my-4">Or</div>
         <div>
-          <button className="w-full flex py-2 justify-center font-bold text-white bg-blue-500 hover:bg-blue-600 rounded-lg space-x-2 transition-all">
+          <button
+            onClick={() => signIn("google")}
+            className="w-full flex py-2 justify-center font-bold text-white bg-blue-500 hover:bg-blue-600 rounded-lg space-x-2 transition-all"
+          >
             <Image
               src={"logo_google.svg"}
               alt="Google Logo"
