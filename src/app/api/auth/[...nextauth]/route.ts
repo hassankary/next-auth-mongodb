@@ -2,6 +2,7 @@ import { connectMongoDB } from "@/libs/mongodb";
 import User from "@/models/user";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google"
 import bcrypt from "bcryptjs";
 import { User as NextAuthUser } from "next-auth";
 
@@ -24,13 +25,13 @@ export const authOptions: NextAuthOptions = {
           const user = await User.findOne({ email });
 
           if (!user) {
-            throw new Error("Account has not been registered")
+            throw new Error("Account has not been registered");
           }
 
           const passwordMatch = await bcrypt.compare(password, user.password);
 
           if (!passwordMatch) {
-            throw new Error("Invalid password")
+            throw new Error("Invalid password");
           }
 
           // Return user object with correct type
@@ -40,6 +41,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error(error.message);
         }
       },
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
   ],
   session: {
