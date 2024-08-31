@@ -13,8 +13,6 @@ export const UserInfo: React.FC = () => {
     if (status === "unauthenticated") {
       router.push("/");
     }
-    // console.log("session =>", session);
-    // console.log("status =>", status);
   }, [status, session, router]);
 
   if (status === "loading") {

@@ -50,7 +50,7 @@ export const RegisterForm: React.FC = () => {
           setEmail("");
           setPassword("");
         }
-        setError("");
+        setError("Registration Success");
       } else {
         const data = await res.json();
         console.log("User registration failed.", data.message);
@@ -98,7 +98,7 @@ export const RegisterForm: React.FC = () => {
             Register
           </button>
           {error ? (
-            <div className="px-3 py-1 w-fit text-white text-sm bg-red-500 rounded-md">
+            <div className={`${error === "Registration Success" ? "bg-green-500" : "bg-red-500"} px-3 py-1 w-fit text-white text-sm rounded-md`}>
               {error}
             </div>
           ) : null}
