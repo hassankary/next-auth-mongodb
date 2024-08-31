@@ -24,7 +24,7 @@ export const UserInfo: React.FC = () => {
   }
 
   return (
-    <div className="min-w-[300px] border-y-2 border-green-500 font-bold px-10 py-5 rounded-2xl shadow-xl space-y-5">
+    <div className="min-w-[300px] max-w-[350px] border-y-2 border-green-500 font-bold px-10 py-5 rounded-2xl shadow-xl space-y-5">
       <h1 className="font-extrabold text-center">Account:</h1>
       <div className="flex flex-col text-center gap-1">
         <div className="flex justify-center">

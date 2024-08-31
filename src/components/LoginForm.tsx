@@ -56,7 +56,7 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="p-10 rounded-2xl">
+    <div className="sm:p-10 rounded-2xl">
       <div className="p-5 border-t-2 border-green-400 rounded-2xl shadow-2xl ">
         <h1 className=" text-xl font-bold mb-5 text-center">Login</h1>
         <form onSubmit={loginHandler} className="flex flex-col gap-3">
@@ -65,14 +65,14 @@ export const LoginForm: React.FC = () => {
             value={email}
             type="text"
             placeholder="Email"
-            className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
+            className="sm:w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
             placeholder="Password"
-            className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
+            className="sm:w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
           <button className=" bg-green-400 px-6 py-2 text-white font-bold hover:bg-green-500 active:scale-95 rounded-lg transition-all">
             Login

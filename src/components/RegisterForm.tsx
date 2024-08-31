@@ -62,7 +62,7 @@ export const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="p-10 rounded-2xl">
+    <div className="sm:p-10 rounded-2xl">
       <div className="p-5 border-t-2 border-green-400 rounded-2xl shadow-2xl ">
         <h1 className=" text-xl font-bold mb-5 text-center">Register</h1>
         <form
@@ -75,21 +75,21 @@ export const RegisterForm: React.FC = () => {
             value={name}
             type="text"
             placeholder="Full Name"
-            className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
+            className="sm:w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
           <input
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             type="text"
             placeholder="Email"
-            className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
+            className="sm:w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
           <input
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             type="password"
             placeholder="Password"
-            className="w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
+            className="sm:w-[400px] border border-gray-200 px-6 py-2 bg-zinc-100/40 rounded-lg"
           />
           <button
             type="submit"
