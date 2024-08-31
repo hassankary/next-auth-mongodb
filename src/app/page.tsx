@@ -1,11 +1,10 @@
 import { LoginForm } from "@/components/LoginForm";
 import { getServerSession } from "next-auth";
-import handler from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Session } from "next-auth";
 
 export default async function Home() {
-  const session: Session | null = await getServerSession(handler);
+  const session: Session | null = await getServerSession();
 
   if (session) redirect("/dashboard");
 
