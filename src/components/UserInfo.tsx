@@ -44,7 +44,7 @@ export const UserInfo: React.FC = () => {
       <div className="flex justify-center">
         <button
           onClick={() => signOut()}
-          className="flex w-fit px-3 py-1 bg-red-500 text-white rounded-lg"
+          className="flex w-fit px-3 py-1 bg-red-500 text-white rounded-lg active:scale-95 transition-all"
         >
           Logout
         </button>
