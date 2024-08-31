@@ -2,7 +2,7 @@ import { connectMongoDB } from "@/libs/mongodb";
 import User from "@/models/user";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from "next-auth/providers/google"
+import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
 import { User as NextAuthUser } from "next-auth";
 
@@ -56,6 +56,8 @@ const authOptions: NextAuthOptions = {
   },
 };
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export default handler;
 
 export { handler as GET, handler as POST };

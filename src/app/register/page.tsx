@@ -1,6 +1,6 @@
 import { RegisterForm } from "@/components/RegisterForm";
 import { getServerSession } from "next-auth";
-import { handler } from "../api/auth/[...nextauth]/route";
+import handler from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { Session } from "next-auth";
 
